@@ -1053,3 +1053,87 @@ a {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===============  MOBILE-FRIENDLY PATCH (append)  =============== */
+
+/* A) Comfortable gutters on phones */
+@media (max-width: 768px) {
+  .container,
+  .container.narrow { padding: 0 16px; }
+}
+
+/* B) Fluid type for large headings and hero copy */
+.home-hero-overlay h1,
+.hero-text h1 {
+  /* Downsize huge headings (.home-hero-overlay h1 was 4.5rem) */
+  font-size: clamp(1.75rem, 6.8vw, 3.25rem);
+}
+.home-hero-overlay p,
+.hero-text p {
+  /* Downsize hero paragraph (was ~1.75rem) */
+  font-size: clamp(1rem, 3.8vw, 1.25rem);
+}
+.hero-subheading {
+  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+}
+.section-title {
+  /* Generic section titles that scale nicely on phones */
+  font-size: clamp(1.5rem, 5.5vw, 2.25rem);
+}
+
+/* C) Home hero height on phones */
+@media (max-width: 768px) {
+  .home-blended-hero {
+    min-height: 65vh;
+    background-position: center;
+  }
+}
+
+/* D) Leadership grid: collapse from 5 columns on small screens */
+@media (max-width: 1200px) { .leadership-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 992px)  { .leadership-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .leadership-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .leadership-grid { grid-template-columns: 1fr; } }
+
+/* E) Make images scale within their containers */
+img { max-width: 100%; height: auto; }
+
+/* F) Mobile nav toggle (hidden on desktop) */
+.menu-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  padding: .25rem .5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .nav-container { align-items: center; }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .nav-links {
+    /* hide by default on small screens; show when .open is present */
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding-top: .5rem;
+  }
+  .nav-links.open { display: flex; }
+
+  /* Make dropdowns usable on touch devices */
+  .dropdown-content { position: static; box-shadow: none; border-radius: 0; }
+  .dropdown:hover .dropdown-content { display: none; } /* disable hover-open on touch */
+  .dropdown:focus-within .dropdown-content,
+  .dropdown.open .dropdown-content { display: block; }
+}
+
+/* Optional: reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade { transition: none; }
+}

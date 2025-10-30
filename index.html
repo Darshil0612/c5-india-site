@@ -16,7 +16,17 @@
     <div class="logo">
       <img src="assets/images/c5-logo.png" alt="C5 Health Logo" />
     </div>
-    <nav class="nav-links">
+
+    <!-- 👇 Add this menu toggle button BEFORE your nav links -->
+    <button class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="Toggle menu">
+      ☰ Menu
+    </button>
+
+    <!-- 👇 Give your nav the ID so it matches aria-controls -->
+    <nav id="primary-nav" class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <div class="dropdown">
@@ -31,6 +41,7 @@
     </nav>
   </div>
 </header>
+
 
 
   <!-- Hero Section -->
@@ -136,7 +147,7 @@
       <a href="contact.html" class="btn-primary">Learn More</a>
     </div>
     <div class="cta-image">
-      <img src="assets\images\cto-doctors.png" alt="Healthcare Team" />
+      <img src="assets/images/cto-doctors.png" alt="Healthcare Team" />
     </div>
   </div>
 </section>
@@ -185,6 +196,32 @@
     }, { threshold: 0.1 });
     fadeEls.forEach(el => observer.observe(el));
   </script>
+
+<script>
+  (function () {
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#primary-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function () {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+</script>
+<script>
+  (function () {
+    const drop = document.querySelector('.dropdown');
+    const btn  = drop?.querySelector('.dropbtn');
+    const menu = drop?.querySelector('.dropdown-content');
+    if (btn && menu) {
+      btn.addEventListener('click', function () {
+        const open = drop.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>
